@@ -8,6 +8,7 @@ import solidPlugin from 'vite-plugin-solid';
 export default defineConfig({
 	root: 'src',
 	build: {
+		outDir: '../dist/',
 		rollupOptions: {
 			input: {
 				'main': path.resolve(__dirname, 'src/index.html'),
