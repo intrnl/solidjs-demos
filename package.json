@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "publish": "pnpm run build; scripts/publish.sh"
+    "publish": "rm -r dist; pnpm run build; scripts/publish.sh"
   },
   "dependencies": {
     "perf-monitor": "^0.4.1",
