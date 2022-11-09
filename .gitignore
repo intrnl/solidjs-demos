@@ -6,4 +6,5 @@ lerna-debug.log*
 
 node_modules
 dist
+deploy
 *.local
