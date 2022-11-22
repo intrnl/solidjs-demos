@@ -76,7 +76,7 @@ else {
 
 		setTimeout(redraw, ENV.timeout);
 	}
-	
+
 	redraw();
 	render(() => <Table dbs={array()} />, root);
 }

@@ -77,13 +77,13 @@ function VizDemo (props) {
 
 	const makePoints = (count) => {
 		const array = [];
-	
+
 		for (let i = 0; i < count; i++) {
 			const [px, py] = project(phyllotaxis(i));
 			const [sx, sy] = project(spiral(i));
 			const [gx, gy] = project(grid(i));
 			const [wx, wy] = project(wave(i));
-	
+
 			array.push({
 				x: 0,
 				y: 0,
@@ -94,7 +94,7 @@ function VizDemo (props) {
 				wx, wy,
 			});
 		}
-	
+
 		return array;
 	}
 
@@ -106,7 +106,7 @@ function VizDemo (props) {
 			spiral = genSpiral(_count);
 			grid = genGrid(_count);
 			wave = genWave(_count);
-	
+
 			setPoints(makePoints(_count));
 		}
 	});
