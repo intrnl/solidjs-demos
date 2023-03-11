@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onCleanup, Index } from 'solid-js';
+import { createEffect, createSignal, Index, onCleanup } from 'solid-js';
 import { render } from 'solid-js/web';
 
 import './style.css';
@@ -6,12 +6,11 @@ import './style.css';
 import * as perfmon from 'perf-monitor';
 import { interpolateViridis } from './viridis.js';
 
-
 const Layout = {
 	PHYLLOTAXIS: 0,
 	GRID: 1,
 	WAVE: 2,
-	SPIRAL: 3
+	SPIRAL: 3,
 };
 
 const LAYOUT_ORDER = [
@@ -23,7 +22,6 @@ const LAYOUT_ORDER = [
 ];
 
 const theta = Math.PI * (3 - Math.sqrt(5));
-
 
 function App () {
 	const [count, setCount] = createSignal(1000);
@@ -53,10 +51,11 @@ function App () {
 			</div>
 
 			<span className='about'>
-				Solid.js 1k Points demo, based on the <a href='https://dingoeatingfuzz.github.io/glimmer-1k/' target='_blank'>Glimmer demo by Michael Lange</a>
+				Solid.js 1k Points demo, based on the{' '}
+				<a href='https://dingoeatingfuzz.github.io/glimmer-1k/' target='_blank'>Glimmer demo by Michael Lange</a>
 			</span>
 		</div>
-	)
+	);
 }
 
 function VizDemo (props) {
@@ -88,15 +87,19 @@ function VizDemo (props) {
 				x: 0,
 				y: 0,
 				color: interpolateViridis(i / count),
-				px, py,
-				sx, sy,
-				gx, gy,
-				wx, wy,
+				px,
+				py,
+				sx,
+				sy,
+				gx,
+				gy,
+				wx,
+				wy,
 			});
 		}
 
 		return array;
-	}
+	};
 
 	createEffect(() => {
 		if (_count !== props.count) {
@@ -147,7 +150,6 @@ function VizDemo (props) {
 		onCleanup(() => (stopped = true));
 	});
 
-
 	return (
 		<svg className='demo'>
 			<Index each={points()}>
@@ -169,7 +171,6 @@ if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
 }
 
 render(() => <App />, document.getElementById('root'));
-
 
 function xForLayout (layout) {
 	switch (layout) {
@@ -244,4 +245,3 @@ function project (vector) {
 	const ww = window.innerWidth / 2;
 	return translate([ww, wh], scale(Math.min(wh, ww), vector));
 }
-

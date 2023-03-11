@@ -6,7 +6,6 @@ import './style.css';
 import './env.js';
 import { createSignal } from 'solid-js';
 
-
 function Table (props) {
 	return (
 		<table class='table table-striped latest-data'>
@@ -41,7 +40,7 @@ function Table (props) {
 				</Index>
 			</tbody>
 		</table>
-	)
+	);
 }
 
 if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {

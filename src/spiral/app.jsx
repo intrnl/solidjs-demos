@@ -5,7 +5,6 @@ import * as perfmon from 'perf-monitor';
 
 import './style.css';
 
-
 function Spiral () {
 	const COUNT = 500;
 	const LOOPS = 6;

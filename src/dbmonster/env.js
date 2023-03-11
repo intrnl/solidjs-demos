@@ -1,5 +1,5 @@
 var ENV = ENV || (function () {
-	"use strict";
+	'use strict';
 
 	var first = true;
 	var counter = 0;
@@ -9,19 +9,19 @@ var ENV = ENV || (function () {
 		return padding.repeat((toLength - this.length) / padding.length).concat(this);
 	});
 
-	function formatElapsed(value) {
+	function formatElapsed (value) {
 		var comps;
 
 		if (value > 60) {
 			comps = (value % 60).toFixed(2).split('.');
 
-			return Math.floor(value / 60) + ":" + comps[0].lpad('0', 2) + "." + comps[1];
+			return Math.floor(value / 60) + ':' + comps[0].lpad('0', 2) + '.' + comps[1];
 		}
 
 		return parseFloat(value).toFixed(2);
 	}
 
-	function getElapsedClassName(elapsed) {
+	function getElapsedClassName (elapsed) {
 		var className = 'Query elapsed';
 		if (elapsed >= 10.0) {
 			className += ' warn_long';
@@ -35,21 +35,21 @@ var ENV = ENV || (function () {
 		return className;
 	}
 
-	function countClassName(queries) {
-		var countClassName = "label";
+	function countClassName (queries) {
+		var countClassName = 'label';
 		if (queries >= 20) {
-			countClassName += " label-important";
+			countClassName += ' label-important';
 		}
 		else if (queries >= 10) {
-			countClassName += " label-warning";
+			countClassName += ' label-warning';
 		}
 		else {
-			countClassName += " label-success";
+			countClassName += ' label-success';
 		}
 		return countClassName;
 	}
 
-	function updateQuery(object) {
+	function updateQuery (object) {
 		if (!object) {
 			object = {};
 		}
@@ -57,34 +57,35 @@ var ENV = ENV || (function () {
 		object.elapsed = elapsed;
 		object.formatElapsed = formatElapsed(elapsed);
 		object.elapsedClassName = getElapsedClassName(elapsed);
-		object.query = "SELECT blah FROM something";
+		object.query = 'SELECT blah FROM something';
 		object.waiting = Math.random() < 0.5;
 		if (Math.random() < 0.2) {
-			object.query = "<IDLE> in transaction";
+			object.query = '<IDLE> in transaction';
 		}
 		if (Math.random() < 0.1) {
-			object.query = "vacuum";
+			object.query = 'vacuum';
 		}
 		return object;
 	}
 
-	function cleanQuery(value) {
+	function cleanQuery (value) {
 		if (value) {
-			value.formatElapsed = "";
-			value.elapsedClassName = "";
-			value.query = "";
+			value.formatElapsed = '';
+			value.elapsedClassName = '';
+			value.query = '';
 			value.elapsed = null;
 			value.waiting = null;
-		} else {
+		}
+		else {
 			return {
-				query: "***",
-				formatElapsed: "",
-				elapsedClassName: ""
+				query: '***',
+				formatElapsed: '',
+				elapsedClassName: '',
 			};
 		}
 	}
 
-	function generateRow(object, keepIdentity, counter) {
+	function generateRow (object, keepIdentity, counter) {
 		var nbQueries = Math.floor((Math.random() * 10) + 1);
 		if (!object) {
 			object = {};
@@ -109,17 +110,20 @@ var ENV = ENV || (function () {
 				var value = object.lastSample.queries[j];
 				if (j <= nbQueries) {
 					updateQuery(value);
-				} else {
+				}
+				else {
 					cleanQuery(value);
 				}
 			}
-		} else {
+		}
+		else {
 			object.lastSample.queries = [];
 			for (var j = 0; j < 12; j++) {
 				if (j < nbQueries) {
 					var value = updateQuery(cleanQuery());
 					object.lastSample.queries.push(value);
-				} else {
+				}
+				else {
 					object.lastSample.queries.push(cleanQuery());
 				}
 			}
@@ -133,13 +137,13 @@ var ENV = ENV || (function () {
 		return object;
 	}
 
-	function getData(keepIdentity) {
+	function getData (keepIdentity) {
 		var oldData = data;
 		if (!keepIdentity) { // reset for each tick when !keepIdentity
 			data = [];
 			for (var i = 1; i <= ENV.rows; i++) {
-				data.push({ dbname: 'cluster' + i, query: "", formatElapsed: "", elapsedClassName: "" });
-				data.push({ dbname: 'cluster' + i + ' replica', query: "", formatElapsed: "", elapsedClassName: "" });
+				data.push({ dbname: 'cluster' + i, query: '', formatElapsed: '', elapsedClassName: '' });
+				data.push({ dbname: 'cluster' + i + ' replica', query: '', formatElapsed: '', elapsedClassName: '' });
 			}
 		}
 		if (!data) { // first init when keepIdentity
@@ -161,7 +165,8 @@ var ENV = ENV || (function () {
 					row.lastSample = null;
 				}
 				generateRow(row, keepIdentity, counter);
-			} else {
+			}
+			else {
 				data[i] = oldData[i];
 			}
 		}
@@ -169,17 +174,18 @@ var ENV = ENV || (function () {
 		return {
 			toArray: function () {
 				return data;
-			}
+			},
 		};
 	}
 
 	var mutationsValue = 0.5;
 
-	function mutations(value) {
+	function mutations (value) {
 		if (value) {
 			mutationsValue = value;
 			return mutationsValue;
-		} else {
+		}
+		else {
 			return mutationsValue;
 		}
 	}
@@ -188,12 +194,12 @@ var ENV = ENV || (function () {
 	var theFirstChild = body.firstChild;
 
 	var sliderContainer = document.createElement('div');
-	sliderContainer.style.cssText = "display: flex";
+	sliderContainer.style.cssText = 'display: flex';
 	var slider = document.createElement('input');
 	var text = document.createElement('label');
 	text.innerHTML = 'mutations : ' + (mutationsValue * 100).toFixed(0) + '%';
-	text.id = "ratioval";
-	slider.setAttribute("type", "range");
+	text.id = 'ratioval';
+	slider.setAttribute('type', 'range');
 	slider.style.cssText = 'margin-bottom: 10px; margin-top: 5px';
 	slider.addEventListener('change', function (e) {
 		ENV.mutations(e.target.value / 100);
@@ -207,7 +213,7 @@ var ENV = ENV || (function () {
 		generateData: getData,
 		rows: 50,
 		timeout: 0,
-		mutations: mutations
+		mutations: mutations,
 	};
 })();
 
