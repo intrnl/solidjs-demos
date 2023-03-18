@@ -1,5 +1,5 @@
-import { batch, createMemo, createSignal, Index, onMount } from 'solid-js';
-import { render, Show } from 'solid-js/web';
+import { Index, batch, createMemo, createSignal, onMount } from 'solid-js';
+import { Show, render } from 'solid-js/web';
 
 import * as perfmon from 'perf-monitor';
 
