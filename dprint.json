@@ -22,7 +22,8 @@
 		"constructor.spaceBeforeParentheses": true,
 		"getAccessor.spaceBeforeParentheses": true,
 		"setAccessor.spaceBeforeParentheses": true,
-		"importDeclaration.sortNamedImports": "caseSensitive"
+		"importDeclaration.sortNamedImports": "caseSensitive",
+		"exportDeclaration.sortNamedExports": "caseSensitive"
 	},
 	"json": {},
 	"markdown": {},
@@ -31,13 +32,12 @@
 	],
 	"excludes": [
 		"**/node_modules",
-		"**/*-lock.json",
 		"dist/",
 		"deploy/"
 	],
 	"plugins": [
-		"https://plugins.dprint.dev/typescript-0.83.0.wasm",
-		"https://plugins.dprint.dev/json-0.17.0.wasm",
+		"https://plugins.dprint.dev/typescript-0.84.0.wasm",
+		"https://plugins.dprint.dev/json-0.17.1.wasm",
 		"https://plugins.dprint.dev/markdown-0.15.2.wasm"
 	]
 }

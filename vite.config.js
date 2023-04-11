@@ -1,8 +1,6 @@
-import * as path from 'node:path';
-
 import { defineConfig } from 'vite';
 
-import solidPlugin from 'vite-plugin-solid';
+import solid from 'vite-plugin-solid';
 
 export default defineConfig({
 	root: 'src',
@@ -11,15 +9,15 @@ export default defineConfig({
 		outDir: '../dist/',
 		rollupOptions: {
 			input: {
-				'main': path.resolve(__dirname, 'src/index.html'),
-				'1kpoints': path.resolve(__dirname, 'src/1kpoints.html'),
-				'spiral': path.resolve(__dirname, 'src/spiral.html'),
-				'dbmonster': path.resolve(__dirname, 'src/dbmonster.html'),
+				'main': 'src/index.html',
+				'1kpoints': 'src/1kpoints/index.html',
+				'spiral': 'src/spiral/index.html',
+				'dbmonster': 'src/dbmonster/index.html',
 			},
 		},
 		modulePreload: false,
 	},
 	plugins: [
-		solidPlugin(),
+		solid(),
 	],
 });
