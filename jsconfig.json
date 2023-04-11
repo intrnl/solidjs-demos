@@ -1,5 +1,10 @@
 {
 	"compilerOptions": {
+		"target": "ESNext",
+		"lib": ["DOM", "ESNext"],
+		"moduleResolution": "NodeNext",
+		"resolveJsonModule": true,
+		"strictNullChecks": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js"
 	}
