@@ -6,6 +6,9 @@ export default defineConfig({
 	root: 'src',
 	base: './',
 	build: {
+		minify: 'terser',
+		sourcemap: true,
+		target: 'esnext',
 		emptyOutDir: true,
 		outDir: '../dist/',
 		rollupOptions: {
@@ -17,7 +20,9 @@ export default defineConfig({
 				'todomvc': 'src/todomvc/index.html',
 			},
 		},
-		modulePreload: false,
+		modulePreload: {
+			polyfill: false,
+		},
 	},
 	plugins: [
 		solid(),
