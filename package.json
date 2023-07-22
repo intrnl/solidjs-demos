@@ -10,12 +10,12 @@
 	},
 	"dependencies": {
 		"perf-monitor": "^0.4.1",
-		"solid-js": "^1.7.6"
+		"solid-js": "^1.7.8"
 	},
 	"devDependencies": {
-		"dprint": "^0.37.1",
-		"terser": "^5.17.7",
-		"vite": "^4.3.9",
+		"dprint": "^0.39.1",
+		"terser": "^5.19.2",
+		"vite": "^4.4.6",
 		"vite-plugin-solid": "^2.7.0"
 	}
 }
