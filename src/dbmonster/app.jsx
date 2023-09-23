@@ -6,21 +6,17 @@ import './style.css';
 import './env.js';
 import { createSignal } from 'solid-js';
 
-function Table (props) {
+function Table(props) {
 	return (
-		<table class='table table-striped latest-data'>
+		<table class="table table-striped latest-data">
 			<tbody>
 				<Index each={props.dbs}>
 					{(db) => (
 						<tr>
-							<td class='dbname'>
-								{db().dbname}
-							</td>
+							<td class="dbname">{db().dbname}</td>
 
-							<td class='query-count'>
-								<span class={db().lastSample.countClassName}>
-									{db().lastSample.nbQueries}
-								</span>
+							<td class="query-count">
+								<span class={db().lastSample.countClassName}>{db().lastSample.nbQueries}</span>
 							</td>
 
 							<Index each={db().lastSample.topFiveQueries}>
@@ -28,9 +24,9 @@ function Table (props) {
 									<td class={query().elapsedClassName}>
 										{query().formatElapsed}
 
-										<div class='popover left'>
-											<div class='popover-content'>{query().query}</div>
-											<div class='arrow'></div>
+										<div class="popover left">
+											<div class="popover-content">{query().query}</div>
+											<div class="arrow"></div>
 										</div>
 									</td>
 								)}
@@ -43,7 +39,7 @@ function Table (props) {
 	);
 }
 
-if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
+if (!/[&?]perfmon=(false|off|0)\b/.test(location.search)) {
 	perfmon.startFPSMonitor();
 	perfmon.startMemMonitor();
 	perfmon.initProfiler('view update');
@@ -51,7 +47,7 @@ if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
 	const root = document.getElementById('root');
 	const [array, setArray] = createSignal([]);
 
-	function redraw () {
+	function redraw() {
 		const next = ENV.generateData().toArray();
 
 		perfmon.startProfile('view update');
@@ -63,12 +59,11 @@ if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
 
 	redraw();
 	render(() => <Table dbs={array()} />, root);
-}
-else {
+} else {
 	const root = document.getElementById('root');
 	const [array, setArray] = createSignal([]);
 
-	function redraw () {
+	function redraw() {
 		const next = ENV.generateData().toArray();
 
 		setArray(next);

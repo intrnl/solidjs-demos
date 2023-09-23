@@ -1,12 +1,14 @@
-function colors (specifier) {
-	var n = specifier.length / 6 | 0, colors = new Array(n), i = 0;
+function colors(specifier) {
+	var n = (specifier.length / 6) | 0,
+		colors = new Array(n),
+		i = 0;
 	while (i < n) {
 		colors[i] = '#' + specifier.slice(i * 6, ++i * 6);
 	}
 	return colors;
 }
 
-function ramp (range) {
+function ramp(range) {
 	let n = range.length;
 	return (t) => range[Math.max(0, Math.min(n - 1, Math.floor(t * n)))];
 }

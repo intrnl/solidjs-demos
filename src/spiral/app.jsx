@@ -5,7 +5,7 @@ import * as perfmon from 'perf-monitor';
 
 import './style.css';
 
-function Spiral () {
+function Spiral() {
 	const COUNT = 500;
 	const LOOPS = 6;
 
@@ -21,7 +21,7 @@ function Spiral () {
 		const max = COUNT + Math.round(Math.sin((counter() / 90) * 2 * Math.PI) * COUNT * 0.5);
 		const next = [];
 
-		for (let i = max; i--;) {
+		for (let i = max; i--; ) {
 			let f = (i / max) * LOOPS;
 			let theta = f * 2 * Math.PI;
 			let m = 20 + i * 2;
@@ -88,34 +88,27 @@ function Spiral () {
 	});
 
 	return (
-		<div class='main'>
+		<div class="main">
 			<Cursor label x={x()} y={y()} big={big()} />
 
 			<Index each={cursors()}>
-				{(cursor) => (
-					<Cursor
-						color={cursor().color}
-						x={cursor().x}
-						y={cursor().y}
-						big={big()}
-					/>
-				)}
+				{(cursor) => <Cursor color={cursor().color} x={cursor().x} y={cursor().y} big={big()} />}
 			</Index>
 		</div>
 	);
 }
 
-function Cursor (props) {
+function Cursor(props) {
 	return (
 		<div
 			classList={{ cursor: true, big: props.big, label: props.label }}
 			style={{
 				'border-color': props.color,
-				'transform': `translate(${props.x}px, ${props.y}px) scale(${props.big ? 2 : 1})`,
+				transform: `translate(${props.x}px, ${props.y}px) scale(${props.big ? 2 : 1})`,
 			}}
 		>
 			<Show when={props.label}>
-				<span class='label'>
+				<span class="label">
 					{props.x} {props.y}
 				</span>
 			</Show>
@@ -123,7 +116,7 @@ function Cursor (props) {
 	);
 }
 
-if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
+if (!/[&?]perfmon=(false|off|0)\b/.test(location.search)) {
 	perfmon.startFPSMonitor();
 	perfmon.startMemMonitor();
 }

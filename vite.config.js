@@ -13,18 +13,16 @@ export default defineConfig({
 		outDir: '../dist/',
 		rollupOptions: {
 			input: {
-				'main': 'src/index.html',
+				main: 'src/index.html',
 				'1kpoints': 'src/1kpoints/index.html',
-				'spiral': 'src/spiral/index.html',
-				'dbmonster': 'src/dbmonster/index.html',
-				'todomvc': 'src/todomvc/index.html',
+				spiral: 'src/spiral/index.html',
+				dbmonster: 'src/dbmonster/index.html',
+				todomvc: 'src/todomvc/index.html',
 			},
 		},
 		modulePreload: {
 			polyfill: false,
 		},
 	},
-	plugins: [
-		solid(),
-	],
+	plugins: [solid()],
 });

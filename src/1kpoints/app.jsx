@@ -13,17 +13,11 @@ const Layout = {
 	SPIRAL: 3,
 };
 
-const LAYOUT_ORDER = [
-	Layout.PHYLLOTAXIS,
-	Layout.SPIRAL,
-	Layout.PHYLLOTAXIS,
-	Layout.GRID,
-	Layout.WAVE,
-];
+const LAYOUT_ORDER = [Layout.PHYLLOTAXIS, Layout.SPIRAL, Layout.PHYLLOTAXIS, Layout.GRID, Layout.WAVE];
 
 const theta = Math.PI * (3 - Math.sqrt(5));
 
-function App () {
+function App() {
 	const [count, setCount] = createSignal(1000);
 
 	const params = new URLSearchParams(location.search);
@@ -36,29 +30,31 @@ function App () {
 		}
 	}
 
-	function onRangeChange (ev) {
+	function onRangeChange(ev) {
 		setCount(ev.target.valueAsNumber);
 	}
 
 	return (
-		<div className='app-wrapper'>
+		<div className="app-wrapper">
 			<VizDemo count={count()} />
 
-			<div className='controls'>
+			<div className="controls">
 				<span># Points</span>
-				<input type='range' min={10} max={10000} value={count} onChange={onRangeChange} />
+				<input type="range" min={10} max={10000} value={count} onChange={onRangeChange} />
 				<span>{count}</span>
 			</div>
 
-			<span className='about'>
+			<span className="about">
 				Solid.js 1k Points demo, based on the{' '}
-				<a href='https://dingoeatingfuzz.github.io/glimmer-1k/' target='_blank'>Glimmer demo by Michael Lange</a>
+				<a href="https://dingoeatingfuzz.github.io/glimmer-1k/" target="_blank">
+					Glimmer demo by Michael Lange
+				</a>
 			</span>
 		</div>
 	);
 }
 
-function VizDemo (props) {
+function VizDemo(props) {
 	const NUM_STEPS = 60 * 2;
 
 	let stopped = false;
@@ -151,11 +147,11 @@ function VizDemo (props) {
 	});
 
 	return (
-		<svg className='demo'>
+		<svg className="demo">
 			<Index each={points()}>
 				{(point) => (
 					<rect
-						class='point'
+						class="point"
 						transform={`translate(${Math.floor(point().x)}, ${Math.floor(point().y)})`}
 						fill={point().color}
 					/>
@@ -165,14 +161,14 @@ function VizDemo (props) {
 	);
 }
 
-if (!(/[&?]perfmon=(false|off|0)\b/).test(location.search)) {
+if (!/[&?]perfmon=(false|off|0)\b/.test(location.search)) {
 	perfmon.startFPSMonitor();
 	perfmon.startMemMonitor();
 }
 
 render(() => <App />, document.getElementById('root'));
 
-function xForLayout (layout) {
+function xForLayout(layout) {
 	switch (layout) {
 		case Layout.PHYLLOTAXIS:
 			return 'px';
@@ -185,7 +181,7 @@ function xForLayout (layout) {
 	}
 }
 
-function yForLayout (layout) {
+function yForLayout(layout) {
 	switch (layout) {
 		case Layout.PHYLLOTAXIS:
 			return 'py';
@@ -198,12 +194,12 @@ function yForLayout (layout) {
 	}
 }
 
-function lerp (obj, percent, startProp, endProp) {
+function lerp(obj, percent, startProp, endProp) {
 	let px = obj[startProp];
 	return px + (obj[endProp] - px) * percent;
 }
 
-function genPhyllotaxis (n) {
+function genPhyllotaxis(n) {
 	return (i) => {
 		let r = Math.sqrt(i / n);
 		let th = i * theta;
@@ -211,12 +207,15 @@ function genPhyllotaxis (n) {
 	};
 }
 
-function genGrid (n) {
+function genGrid(n) {
 	let rowLength = Math.round(Math.sqrt(n));
-	return (i) => [-0.8 + (1.6 / rowLength) * (i % rowLength), -0.8 + (1.6 / rowLength) * Math.floor(i / rowLength)];
+	return (i) => [
+		-0.8 + (1.6 / rowLength) * (i % rowLength),
+		-0.8 + (1.6 / rowLength) * Math.floor(i / rowLength),
+	];
 }
 
-function genWave (n) {
+function genWave(n) {
 	let xScale = 2 / (n - 1);
 	return (i) => {
 		let x = -1 + i * xScale;
@@ -224,7 +223,7 @@ function genWave (n) {
 	};
 }
 
-function genSpiral (n) {
+function genSpiral(n) {
 	return (i) => {
 		let t = Math.sqrt(i / (n - 1)),
 			phi = t * Math.PI * 10;
@@ -232,15 +231,15 @@ function genSpiral (n) {
 	};
 }
 
-function scale (magnitude, vector) {
+function scale(magnitude, vector) {
 	return vector.map((p) => p * magnitude);
 }
 
-function translate (translation, vector) {
+function translate(translation, vector) {
 	return vector.map((p, i) => p + translation[i]);
 }
 
-function project (vector) {
+function project(vector) {
 	const wh = window.innerHeight / 2;
 	const ww = window.innerWidth / 2;
 	return translate([ww, wh], scale(Math.min(wh, ww), vector));

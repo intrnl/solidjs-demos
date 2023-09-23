@@ -3,7 +3,7 @@ import { render } from 'solid-js/web';
 
 import './style.css';
 
-function App () {
+function App() {
 	const ENTER_KEY = 13;
 	const ESCAPE_KEY = 27;
 
@@ -63,8 +63,7 @@ function App () {
 	const handleEdit = (event) => {
 		if (event.which === ENTER_KEY) {
 			event.target.blur();
-		}
-		else if (event.which === ESCAPE_KEY) {
+		} else if (event.which === ESCAPE_KEY) {
 			setEditing(null);
 		}
 	};
@@ -89,39 +88,37 @@ function App () {
 
 	return (
 		<>
-			<header class='header'>
+			<header class="header">
 				<h1>todos</h1>
-				<input onKeyDown={addTodo} placeholder='What needs to be done' className='new-todo' autoFocus />
+				<input onKeyDown={addTodo} placeholder="What needs to be done" className="new-todo" autoFocus />
 			</header>
 
 			<Show when={items().length > 0}>
-				<section class='main'>
+				<section class="main">
 					<input
-						id='toggle-all'
-						type='checkbox'
+						id="toggle-all"
+						type="checkbox"
 						checked={remaining() === 0}
 						onChange={toggleAll}
-						className='toggle-all'
+						className="toggle-all"
 					/>
-					<label htmlFor='toggle-all'>Mark all as complete</label>
+					<label htmlFor="toggle-all">Mark all as complete</label>
 
-					<ul class='todo-list'>
+					<ul class="todo-list">
 						<For each={filteredItems()}>
 							{(item) => (
-								<li class='todo' classList={{ completed: item.completed, editing: editing() === item.id }}>
-									<div className='view'>
+								<li class="todo" classList={{ completed: item.completed, editing: editing() === item.id }}>
+									<div className="view">
 										<input
-											type='checkbox'
+											type="checkbox"
 											checked={item.completed}
 											onChange={(event) => toggleTodo(item.id, event)}
-											className='toggle'
+											className="toggle"
 										/>
 
-										<label onDblClick={() => setEditing(item.id)}>
-											{item.title}
-										</label>
+										<label onDblClick={() => setEditing(item.id)}>{item.title}</label>
 
-										<button onClick={() => removeTodo(item.id)} className='destroy'></button>
+										<button onClick={() => removeTodo(item.id)} className="destroy"></button>
 									</div>
 
 									<Show when={editing() === item.id}>
@@ -130,7 +127,7 @@ function App () {
 											defaultValue={item.title}
 											onKeyDown={handleEdit}
 											onBlur={handleSubmit}
-											class='edit'
+											class="edit"
 										/>
 									</Show>
 								</li>
@@ -138,31 +135,31 @@ function App () {
 						</For>
 					</ul>
 
-					<footer className='footer'>
-						<span className='todo-count'>
+					<footer className="footer">
+						<span className="todo-count">
 							<strong>{remaining}</strong> {remaining() === 1 ? 'item' : 'items'} left
 						</span>
 
-						<ul className='filters'>
+						<ul className="filters">
 							<li>
-								<a classList={{ selected: visibility() === 'all' }} href='#/'>
+								<a classList={{ selected: visibility() === 'all' }} href="#/">
 									All
 								</a>
 							</li>
 							<li>
-								<a classList={{ selected: visibility() === 'active' }} href='#/active'>
+								<a classList={{ selected: visibility() === 'active' }} href="#/active">
 									Active
 								</a>
 							</li>
 							<li>
-								<a classList={{ selected: visibility() === 'completed' }} href='#/completed'>
+								<a classList={{ selected: visibility() === 'completed' }} href="#/completed">
 									Completed
 								</a>
 							</li>
 						</ul>
 
 						<Show when={items().length > remaining()}>
-							<button className='clear-completed' onClick={clearCompleted}>
+							<button className="clear-completed" onClick={clearCompleted}>
 								Clear completed
 							</button>
 						</Show>
