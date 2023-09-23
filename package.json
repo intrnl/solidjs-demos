@@ -6,14 +6,15 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"publish": "rm -r dist; pnpm run build; scripts/publish.sh"
+		"publish": "rm -r dist; pnpm run build; scripts/publish.sh",
+		"fmt": "prettier --cache --write ."
 	},
 	"dependencies": {
 		"perf-monitor": "^0.4.1",
 		"solid-js": "^1.7.12"
 	},
 	"devDependencies": {
-		"dprint": "^0.41.0",
+		"prettier": "^3.0.3",
 		"terser": "^5.19.4",
 		"vite": "^4.4.9",
 		"vite-plugin-solid": "^2.7.0"
